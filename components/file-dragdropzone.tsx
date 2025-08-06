@@ -18,7 +18,7 @@ export default function FileDragDropZone() {
     },
   });
 
-  const onDrop = useCallback(async (acceptedFiles) => {
+  const onDrop = useCallback(async (acceptedFiles: File[]) => {
     if (acceptedFiles.length > 0) {
       const formData = new FormData();
 

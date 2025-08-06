@@ -2,6 +2,7 @@
 
 import { createServerSupabaseClient } from "../utils/supabase/server";
 
+// @ts-ignore
 function handleError(error) {
   if (error) {
     console.error(error);
@@ -19,7 +20,7 @@ export async function uploadFile(formData: FormData) {
   const results = await Promise.all(
     files.map((file) =>
       supabase.storage
-        .from(process.env.NEXT_PUBLIC_STORAGE_BUCKET)
+        .from(process.env.NEXT_PUBLIC_STORAGE_BUCKET!)
         .upload(file.name, file, { upsert: true })
     )
   );
@@ -31,8 +32,8 @@ export async function searchFiles(search: string = "") {
   const supabase = await createServerSupabaseClient();
 
   const { data, error } = await supabase.storage
-    .from(process.env.NEXT_PUBLIC_STORAGE_BUCKET)
-    .list(null, {
+    .from(process.env.NEXT_PUBLIC_STORAGE_BUCKET!)
+    .list(undefined, {
       search,
     });
 
@@ -45,7 +46,7 @@ export async function deleteFile(fileName: string) {
   const supabase = await createServerSupabaseClient();
 
   const { data, error } = await supabase.storage
-    .from(process.env.NEXT_PUBLIC_STORAGE_BUCKET)
+    .from(process.env.NEXT_PUBLIC_STORAGE_BUCKET!)
     .remove([fileName]);
 
   handleError(error);

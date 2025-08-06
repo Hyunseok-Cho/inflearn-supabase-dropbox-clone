@@ -6,6 +6,7 @@ import { getImageUrl } from "@/utils/supabase/storage"
 import {IconButton, Spinner} from "@material-tailwind/react"
 import { useMutation } from "@tanstack/react-query"
 
+// @ts-ignore
 export default function DropboxImage({image}) {
 
     const deleteFileMutation = useMutation({
